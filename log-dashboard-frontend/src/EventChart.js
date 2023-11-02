@@ -6,6 +6,12 @@ const EventChart = ({ data }) => {
   // Count the frequency of each system call type
   const syscallFrequency = data.reduce((acc, event) => {
     const syscallName = event.event_context.syscall_name;
+    
+    // check for undefined syscall name
+    if (syscallName === undefined) {
+      return acc;
+    }
+    
     acc[syscallName] = (acc[syscallName] || 0) + 1;
     return acc;
   }, {});
