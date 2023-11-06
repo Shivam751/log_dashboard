@@ -8,14 +8,14 @@
 //       // { Header: 'Timestamp', accessor: 'event_context.datetime' },
 //       // { Header: 'System Call', accessor: 'event_context.syscall_name' },
 //       // Add other columns as needed
-//       { Header: 'Timestamp', accessor: 'event_context.datetime' },
-//       { Header: 'System Call', accessor: 'event_context.syscall_name' },
-//       { Header: 'Return Value', accessor: 'event_context.retval' },
-//       { Header: 'Host PID', accessor: 'event_context.task_context.host_pid' },
-//       { Header: 'Host PPID ', accessor: 'event_context.task_context.host_ppid' },
+      // { Header: 'Timestamp', accessor: 'event_context.datetime' },
+      // { Header: 'System Call', accessor: 'event_context.syscall_name' },
+      // { Header: 'Return Value', accessor: 'event_context.retval' },
+      // { Header: 'Host PID', accessor: 'event_context.task_context.host_pid' },
+      // { Header: 'Host PPID ', accessor: 'event_context.task_context.host_ppid' },
 //       // Add other columns as needed
-//       { Header: 'PID', accessor: 'event_context.task_context.pid' },
-//       { Header: 'PPID', accessor: 'event_context.task_context.ppid' },
+      // { Header: 'PID', accessor: 'event_context.task_context.pid' },
+      // { Header: 'PPID', accessor: 'event_context.task_context.ppid' },
 //     ],
 //     []
 //   );
@@ -127,9 +127,15 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Table
 const LogTable = ({ data }) => {
   const columns = React.useMemo(
     () => [
+      // { Header: 'Timestamp', accessor: 'event_context.datetime' },
+      // { Header: 'System Call', accessor: 'event_context.syscall_name' },
       { Header: 'Timestamp', accessor: 'event_context.datetime' },
       { Header: 'System Call', accessor: 'event_context.syscall_name' },
-      // Add other columns as needed
+      { Header: 'Return Value', accessor: 'event_context.retval' },
+      { Header: 'Host PID', accessor: 'event_context.task_context.host_pid' },
+      { Header: 'Host PPID ', accessor: 'event_context.task_context.host_ppid' },
+      { Header: 'PID', accessor: 'event_context.task_context.pid' },
+      { Header: 'PPID', accessor: 'event_context.task_context.ppid' },
     ],
     []
   );
