@@ -10,6 +10,12 @@ def parse_log_file():
     with open(log_file_path, 'r', encoding='utf-8', errors='replace') as file:
         log_content = file.read()
 
+    # search for '^C' and remove it
+    # log_content = log_content.replace('^C', '')
+
+    last_valid_json_end = log_content.rfind('},')
+    log_content = log_content[:last_valid_json_end + 1] + ']}'
+
     # Parse the JSON content
     try:
         log_data = json.loads(log_content, strict=False)
