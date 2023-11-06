@@ -10,9 +10,6 @@ def parse_log_file():
     with open(log_file_path, 'r', encoding='utf-8', errors='replace') as file:
         log_content = file.read()
 
-    # search for '^C' and remove it
-    # log_content = log_content.replace('^C', '')
-
     last_valid_json_end = log_content.rfind('},')
     log_content = log_content[:last_valid_json_end + 1] + ']}'
 
@@ -32,6 +29,8 @@ def parse_log_file():
 class TaskCommandsAPIView(APIView):
     def get(self, request, *args, **kwargs):
         log_data = parse_log_file()
+        # get only those which has syscall_id in event_context
+        log_data = [entry for entry in log_data if 'syscall_id' in entry['event_context']]
         task_commands = sorted(set(entry['event_context']['task_context']['task_command'] for entry in log_data))
         return JsonResponse(task_commands, safe=False)
     
@@ -39,6 +38,7 @@ class LogEventsAPIView(APIView):
     def get(self, request, *args, **kwargs):
         task_command = request.GET.get('task_command')
         log_data = parse_log_file()
+        log_data = [entry for entry in log_data if 'syscall_id' in entry['event_context']]
         events = [entry for entry in log_data if entry['event_context']['task_context']['task_command'] == task_command]
         return JsonResponse(events, safe=False)
     
